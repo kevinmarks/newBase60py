@@ -4,6 +4,10 @@
     Licence CC0
     based on http://faruk.akgul.org/blog/tantek-celiks-newbase60-in-python-and-java/'''
 
+import sys
+
+INTEGER_TYPES = (int, long) if sys.version_info < (3,) else (int,)
+
 CHARACTERS = '0123456789ABCDEFGHJKLMNPQRSTUVWXYZ_abcdefghijkmnopqrstuvwxyz'
 
 NUMBERS = dict(zip(CHARACTERS,range(len(CHARACTERS))))
@@ -13,7 +17,7 @@ NUMBERS['O']=0 # typo capital O to 0
 
 def numtosxg(n):
     s = ''
-    if not isinstance(n, (int, long)) or n == 0:
+    if not isinstance(n, INTEGER_TYPES) or n == 0:
         return '0'
     while n > 0:
         n, i = divmod(n, 60)
